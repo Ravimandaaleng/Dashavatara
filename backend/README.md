@@ -4,22 +4,38 @@ Backend API for Dashavatara.
 
 Dashavatara is an AI-powered home service marketplace that connects customers with verified technicians and contractors.
 
+---
+
 ## Current Phase
 
-Phase B1 - Backend Foundation
+Phase B2 - MongoDB + Database Foundation
+
+---
 
 ## Technology
 
 - Node.js
 - Express.js
-- MongoDB / Mongoose
+- MongoDB
+- Mongoose
 - REST API
 - dotenv
 - CORS
 - Cookie Parser
 
-## Run Development Server
+---
 
-```bash
-npm install
-npm run dev
+## Project Structure
+
+```text
+backend/
+├── config/
+├── controllers/
+├── middleware/
+├── models/
+├── routes/
+├── services/
+├── utils/
+├── uploads/
+├── app.js
+└── server.js

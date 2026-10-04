@@ -1,12 +1,19 @@
 import dotenv from "dotenv";
-import app from "./app.js";
 
 dotenv.config();
 
+import app from "./app.js";
+import connectDB from "./config/db.js";
+import setupDatabaseEvents from "./config/dbEvents.js";
+
 const PORT = process.env.PORT || 5000;
 
-const startServer = () => {
+const startServer = async () => {
   try {
+    setupDatabaseEvents();
+
+    await connectDB();
+
     app.listen(PORT, () => {
       console.log("");
       console.log("==========================================");
@@ -14,12 +21,19 @@ const startServer = () => {
       console.log("==========================================");
       console.log(`🚀 Server: http://localhost:${PORT}`);
       console.log(`🌍 Environment: ${process.env.NODE_ENV}`);
+      console.log("🗄️ Database: Connected");
       console.log("📡 Status: Running");
       console.log("==========================================");
       console.log("");
     });
   } catch (error) {
-    console.error("Failed to start server:", error.message);
+    console.error("");
+    console.error("==========================================");
+    console.error("        SERVER STARTUP FAILED");
+    console.error("==========================================");
+    console.error(error.message);
+    console.error("==========================================");
+
     process.exit(1);
   }
 };

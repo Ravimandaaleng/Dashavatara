@@ -2,11 +2,13 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
+import healthRoutes from "./routes/healthRoutes.js";
+
 const app = express();
 
 /*
 |--------------------------------------------------------------------------
-| CORS Configuration
+| CORS
 |--------------------------------------------------------------------------
 */
 
@@ -19,7 +21,7 @@ app.use(
 
 /*
 |--------------------------------------------------------------------------
-| Body Parsing
+| Body Parser
 |--------------------------------------------------------------------------
 */
 
@@ -46,7 +48,7 @@ app.use(cookieParser());
 
 /*
 |--------------------------------------------------------------------------
-| API Root
+| Root Route
 |--------------------------------------------------------------------------
 */
 
@@ -60,18 +62,11 @@ app.get("/", (req, res) => {
 
 /*
 |--------------------------------------------------------------------------
-| Health Check
+| Health Routes
 |--------------------------------------------------------------------------
 */
 
-app.get("/api/health", (req, res) => {
-  res.status(200).json({
-    success: true,
-    service: "Dashavatara Backend",
-    status: "healthy",
-    environment: process.env.NODE_ENV || "development"
-  });
-});
+app.use("/api/health", healthRoutes);
 
 /*
 |--------------------------------------------------------------------------
